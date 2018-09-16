@@ -5,27 +5,6 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-
-
-
-client.on('message', message => {
-    if (message.content.startsWith(prefix + "help")) {
-let embed = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.addField('     **+mute** ' ,' **Tempmute** ')
-.addField('     **+unmute** ' ,' **UnMute a Member** ')
-.addField('     **+ban**  ' ,' **tempbanned some one** ')
-.addField('     **+kick** ' , '**Kick someone**')
-.addField('     **+prune** ' , '**Clear the chat**')
-.addField('     **+addrole** ' ,' **Give SomeOne a Role**')
-.addField('     **+removerole** ' ,' **Remove a Role of a Person**')
-.setColor('#7d2dbe')
-message.channel.sendEmbed(embed);
-}
-});
-
-
-
 client.on('message', async message => {
     var moment = require('moment');
     let date = moment().format('Do MMMM YYYY , hh:mm');
@@ -59,6 +38,27 @@ client.on('message', async message => {
     });
    }
 });
+
+
+
+client.on('message', message => {
+    if (message.content.startsWith(prefix + "help")) {
+let embed = new Discord.RichEmbed()
+.setThumbnail(message.author.avatarURL)
+.addField('     **+mute** ' ,' **Tempmute** ')
+.addField('     **+unmute** ' ,' **UnMute a Member** ')
+.addField('     **+ban**  ' ,' **tempbanned some one** ')
+.addField('     **+kick** ' , '**Kick someone**')
+.addField('     **+prune** ' , '**Clear the chat**')
+.addField('     **+addrole** ' ,' **Give SomeOne a Role**')
+.addField('     **+removerole** ' ,' **Remove a Role of a Person**')
+.setColor('#7d2dbe')
+message.channel.sendEmbed(embed);
+}
+});
+
+
+
 
 
 
