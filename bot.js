@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = "#";
+const prefix = "+";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -34,7 +34,7 @@ client.on('message', async message => {
     let messageArray = message.content.split(" ");
     let time = messageArray[2];
     if(message.content.startsWith(prefix + "ban")) {
-       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**- ما معك برمشن**");
+       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**- You Dont Have BAN_MEMBERS Permission**");
        if(!User) message.channel.send("**- Could not find that user**");
        if(User.id === client.user.id) return message.channel.send("**- You cant banned the bot**");
        if(User.id === message.guild.owner.id) return message.channel.send("**- You cant banned the ownership**");
@@ -69,7 +69,7 @@ client.on("message", message => {
 
     if (command === prefix + "unmute") {
       let Warned = message.mentions.users.first();
-        if(!Warned) return message.channel.send("Usage: %unmute [User].");
+        if(!Warned) return message.channel.send("Usage: +unmute [User].");
       if(!message.member.hasPermission('MANAGE_ROLES_OR_PERMISSIONS')) return message.reply('**You don’t have `MANAGE_ROLES_OR_PERMISSIONS` permissions**');
     let modlog = client.channels.find('name', 'incidents');
 
