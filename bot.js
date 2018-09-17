@@ -164,7 +164,7 @@ if(message.content.startsWith(prefix + 'hackban')) {
             message.channel.send(`:white_check_mark: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!`);
            
             let banInfo = new Discord.RichEmbed()
-            .setTitle('**[UNBANNED]**')
+            .setTitle('**~UNBANNED~**')
             .setThumbnail(message.author.avatarURL)
             .setColor('GREEN')
             .addField('Unbanned By:', `${message.author.tag}`)
