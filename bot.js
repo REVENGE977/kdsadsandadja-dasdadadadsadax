@@ -13,7 +13,7 @@ client.on('message', async message => {
     let messageArray = message.content.split(" ");
     let time = messageArray[2];
     if(message.content.startsWith(prefix + "ban")) {
-       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.reply('you dont have permissions')
+       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return;
        if(!User) message.channel.send("**- Could not find that user**");
        if(User.id === client.user.id) return message.channel.send("**- You cant banned the bot**");
        if(User.id === message.guild.owner.id) return message.channel.send("**- You cant banned the ownership**");
@@ -148,40 +148,6 @@ if(message.content.startsWith(prefix + 'hackban')) {
     message.channel.send(`Theres no user with the ID of ${nourid}, please try again. :face_palm:`)
   })
   }});
-client.on('message', message => {
-    var command = message.content.toLowerCase().split(" ")[0];
-    var args = message.content.toLowerCase().split(" ");
-    var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
-    if(command == prefix + 'unban') {
-        if(!message.member.hasPermission('BAN_MEMBERS')) return;
-        if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send(':no_entry: | I dont have **BAN_MEMBERS** Permission!');
-        if(!args[1]) return  message.channel.send(':no_entry: | Please type the ID of user');
-        if(args[1].length < 16) return message.reply(':no_entry: | This ID is not id user!');
-        message.guild.fetchBans().then(bans => {
-            var Found = bans.find(m => m.id === args[1]);
-            if(!Found) return message.channel.send(`:no_entry: | <@${message.author.id}> This preson not have any ban from this server! :unlock:`);
-            message.guild.unban(args[1]);
-            message.channel.send(`:white_check_mark: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!`);
-           
-            let banInfo = new Discord.RichEmbed()
-            .setTitle('**~UNBANNED~**')
-            .setThumbnail(message.author.avatarURL)
-            .setColor('GREEN')
-            .addField('Unbanned By:', `${message.author.tag}`)
-            .addField('Unbanned User:', `${userM} with id ${userM.id}`)
-            .addField('Unbanned In', `${message.channel.name}`)
-            .addField('Time & Date', `${message.createdAt}`)
-            .setTimestamp()
-            .setFooter(userM.user.tag, userM.user.avatarURL)
-let incidentchannel = message.guild.channels.find(`name`, "incidents");
-if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-incidentchannel.send(banInfo);
-            }
-        )
-
-
-
-    }})
 
 
 
