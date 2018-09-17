@@ -181,7 +181,7 @@ incidentchannel.send(banInfo);
 
 
 
-    }
+    }})
 
 
 
