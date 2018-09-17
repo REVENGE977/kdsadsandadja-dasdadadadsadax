@@ -148,7 +148,7 @@ if(message.content.startsWith(prefix + 'hackban')) {
     message.channel.send(`Theres no user with the ID of ${nourid}, please try again. :face_palm:`)
   })
   }});
-
+client.on('message', message => {
     var command = message.content.toLowerCase().split(" ")[0];
     var args = message.content.toLowerCase().split(" ");
     var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
