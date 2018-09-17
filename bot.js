@@ -13,7 +13,7 @@ client.on('message', async message => {
     let messageArray = message.content.split(" ");
     let time = messageArray[2];
     if(message.content.startsWith(prefix + "ban")) {
-       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**- You Dont Have BAN_MEMBERS Permission**");
+       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return;
        if(!User) message.channel.send("**- Could not find that user**");
        if(User.id === client.user.id) return message.channel.send("**- You cant banned the bot**");
        if(User.id === message.guild.owner.id) return message.channel.send("**- You cant banned the ownership**");
