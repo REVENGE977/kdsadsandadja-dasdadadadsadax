@@ -155,9 +155,11 @@ let incidentchannel = message.guild.channels.find(`name`, "incidents");
 if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
 incidentchannel.send(banInfo);
             }
-        })
+        )
+
+
+
     }
-});
 
 
 
