@@ -133,8 +133,27 @@ if(!incidentchannel) return message.channel.send("Can't find incidents channel."
 
   });
 
+client.on('message', message => {
+let perm = message.guild.member(message.author).hasPermission('ADMINISTRATOR') || message.guild.member(message.author).hasPermission('BAN_MEMBERS')
+if (!perm) return message.reply(':x: | **You don\'t have `BAN_MEMBERS` permission to use this command**.')
+if(message.content.startsWith(prefix + 'hackban')) {
+  let nourid = message.content.split(" ").slice(3).join(" ");
+  client.fetchUser(nourid).then(id => {
+    message.guild.ban(id).catch(err => {
+      message.channel.send("Error 404, failed to ban this user :( -> " +id)
+      console.log(err)
+    })
+    message.channel.send(`I banned the user ${id} successfully.`)
+  }).catch(() => {
+    message.channel.send(`Theres no user with the ID of ${nourid}, please try again. :face_palm:`)
+  })
+  }});
+
+    var command = message.content.toLowerCase().split(" ")[0];
+    var args = message.content.toLowerCase().split(" ");
+    var userM = message.guild.member(message.mentions.users.first() || message.guild.members.find(m => m.id === args[1]));
     if(command == prefix + 'unban') {
-        if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(':no_entry: | You dont have **BAN_MEMBERS** Permission!');
+        if(!message.member.hasPermission('BAN_MEMBERS')) return;
         if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send(':no_entry: | I dont have **BAN_MEMBERS** Permission!');
         if(!args[1]) return  message.channel.send(':no_entry: | Please type the ID of user');
         if(args[1].length < 16) return message.reply(':no_entry: | This ID is not id user!');
@@ -148,7 +167,10 @@ if(!incidentchannel) return message.channel.send("Can't find incidents channel."
             .setTitle('**[UNBANNED]**')
             .setThumbnail(message.author.avatarURL)
             .setColor('GREEN')
-            .setDescription(`**\n:airplane: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!\n\n**User:** <@${args[1]}> (ID: ${args[1]})\n**By:** <@${message.author.id}> (ID: ${message.author.id})`)
+            .addField('Unbanned By:', `${message.author.tag}`)
+            .addField('Unbanned User:', `${userM} with id ${userM.id}`)
+            .addField('Unbanned In', `${message.channel.name}`)
+            .addField('Time & Date', `${message.createdAt}`)
             .setTimestamp()
             .setFooter(userM.user.tag, userM.user.avatarURL)
 let incidentchannel = message.guild.channels.find(`name`, "incidents");
