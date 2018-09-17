@@ -133,7 +133,31 @@ if(!incidentchannel) return message.channel.send("Can't find incidents channel."
 
   });
 
-
+    if(command == prefix + 'unban') {
+        if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send(':no_entry: | You dont have **BAN_MEMBERS** Permission!');
+        if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) return message.channel.send(':no_entry: | I dont have **BAN_MEMBERS** Permission!');
+        if(!args[1]) return  message.channel.send(':no_entry: | Please type the ID of user');
+        if(args[1].length < 16) return message.reply(':no_entry: | This ID is not id user!');
+        message.guild.fetchBans().then(bans => {
+            var Found = bans.find(m => m.id === args[1]);
+            if(!Found) return message.channel.send(`:no_entry: | <@${message.author.id}> This preson not have any ban from this server! :unlock:`);
+            message.guild.unban(args[1]);
+            message.channel.send(`:white_check_mark: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!`);
+           
+            let banInfo = new Discord.RichEmbed()
+            .setTitle('**[UNBANNED]**')
+            .setThumbnail(message.author.avatarURL)
+            .setColor('GREEN')
+            .setDescription(`**\n:airplane: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!\n\n**User:** <@${args[1]}> (ID: ${args[1]})\n**By:** <@${message.author.id}> (ID: ${message.author.id})`)
+            .setTimestamp()
+            .setFooter(userM.user.tag, userM.user.avatarURL)
+           
+            if(logChannel) {
+                logChannel.send(banInfo);
+            }
+        })
+    }
+});
 
 
 
