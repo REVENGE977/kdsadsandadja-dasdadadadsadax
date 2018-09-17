@@ -151,9 +151,9 @@ if(!incidentchannel) return message.channel.send("Can't find incidents channel."
             .setDescription(`**\n:airplane: Successfully \`\`UNBANNED\`\` <@${args[1]}> From the server!\n\n**User:** <@${args[1]}> (ID: ${args[1]})\n**By:** <@${message.author.id}> (ID: ${message.author.id})`)
             .setTimestamp()
             .setFooter(userM.user.tag, userM.user.avatarURL)
-           
-            if(logChannel) {
-                logChannel.send(banInfo);
+let incidentchannel = message.guild.channels.find(`name`, "incidents");
+if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
+incidentchannel.send(banInfo);
             }
         })
     }
