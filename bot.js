@@ -6,7 +6,7 @@ client.on('ready', () => {
 });
 
 client.on('message', async message => {
-    var moment = require('moment');
+const moment = require('moment');
     let date = moment().format('Do MMMM YYYY , hh:mm');
     let User = message.mentions.users.first();
     let Reason = message.content.split(" ").slice(3).join(" ");
