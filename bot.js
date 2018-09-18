@@ -178,6 +178,7 @@ client.on('message',async message => {
   });
 
     
+   
   client.on('message',async message => {
     if(message.content.startsWith(prefix + "setTime")) {
     if(!message.guild.member(message.author).hasPermission('MANAGE_CHANNELS')) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
