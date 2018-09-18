@@ -153,7 +153,7 @@ client.on('message',async message => {
         SPEAK: false
       });
       setInterval(function() {
-        c.setName(`Voice Online : [ ${message.guild.members.filter(m => m.voiceChannel).size} ]`)
+        c.setName(`Voice Online : 「${message.guild.members.filter(m => m.voiceChannel).size}」`)
       },1000);
     });
     }
@@ -171,7 +171,7 @@ client.on('message',async message => {
         SPEAK: false
       });
       setInterval(function() {
-        c.setName(`Members Count : [ ${message.guild.members.size} ]`)
+        c.setName(`Members Count : 「${message.guild.members.size}」`)
       },1000);
     });
     }
