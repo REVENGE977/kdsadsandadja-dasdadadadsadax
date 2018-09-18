@@ -193,7 +193,7 @@ client.on('message',async message => {
           setInterval(function() {
 
         var currentTime = new Date(),
-        hours = currentTime.getHours(),
+        hours = currentTime.getHours() + 3 ,
         minutes = currentTime.getMinutes(),
         seconds = currentTime.getSeconds(),
         years = currentTime.getFullYear(),
