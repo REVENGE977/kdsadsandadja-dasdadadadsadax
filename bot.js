@@ -171,7 +171,7 @@ client.on('message',async message => {
         SPEAK: false
       });
       setInterval(function() {
-        c.setName(`👪 - Members Count : 「${message.guild.members.size}」`)
+        c.setName(`👪 - Members Count : 「${message.guild.memberCount}」`)
       },1000);
     });
     }
