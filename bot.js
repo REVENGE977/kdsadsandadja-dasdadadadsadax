@@ -338,7 +338,7 @@ const clans = JSON.parse(fs.readFileSync("./ClanSystem/ClanSystem.json", 'UTF8')
 const system = JSON.parse(fs.readFileSync("./ClanSystem/ClanStats.json", 'UTF8'));
 const level = JSON.parse(fs.readFileSync("./ClanSystem/ClanLevels.json", 'UTF8'));
 
-hero.on('message',async message => {
+client.on('message',async message => {
   if(message.author.bot) return;
   if(message.channel.type === 'dm') return;
 
@@ -735,7 +735,7 @@ hero.on('message',async message => {
           let members = clans[system[author.id].clan].members.length;
           let cvlMembers = Array.from(clans[name].members);
           for(let i = 0; i < cvlMembers.length; i++) {
-            let g = hero.users.get(cvlMembers[0]);
+            let g = client.users.get(cvlMembers[0]);
               g.send(`- \`${system[author.id].clan}\`, تم اقفال الكلان`).catch();
               system[g.id] = {clan: 'None',joinedAt: new Date().toLocaleString() ,clanLevel: 0};
               fs.writeFile('./ClanSystem/ClanStats.json', JSON.stringify(system, null, 4), function(err) {if(err) console.log(err)});
