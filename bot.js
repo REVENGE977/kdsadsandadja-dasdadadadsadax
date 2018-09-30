@@ -1376,7 +1376,7 @@ message.delete()
 
 
  client.on('message', message => {
-  var prefix = "p#"
+  var prefix = "+"
    let args = message.content.split(' ').slice(1);
    if(message.content.startsWith(prefix + 'role')) {
        let member = message.mentions.users.first();
