@@ -56,7 +56,7 @@ client.on('message', async message => {
   let Reason = message.content.split(" ").slice(3).join(" ");
   let messageArray = message.content.split(" ");
   let time = messageArray[2];
-  if(message.content.startsWith(prefix + "tempban")) {
+  if(message.content.startsWith(prefix + "ban")) {
      if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
      if(!User) message.channel.send("**Mention Someone**");
      if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
