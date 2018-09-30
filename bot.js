@@ -65,7 +65,7 @@ client.on('message', async message => {
      if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Error in this Duration**');
      if(!Reason) message.channel.send("**- اكتب Reason**");
      let banEmbed = new Discord.RichEmbed()
-     .setAuthor(`You have been banned from ${message.guild.name} !`)
+     .setAuthor(`New Banned User !`)
      .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
      .addField('- Banned By: ',message.author.tag,true)
      .addField('- Banned User:', `${User}`)
@@ -102,8 +102,8 @@ client.on('message', async message => {
      if(!time) return message.channel.send("**- اكتب الوقت**");
      if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Error in this Duration**');
      if(!Reason) message.channel.send("**- اكتب Reason**");
-     let banEmbed = new Discord.RichEmbed()
-     .setAuthor(`You have been banned from ${message.guild.name} !`)
+     let bandEmbed = new Discord.RichEmbed()
+     .setAuthor(`New Banned User !`)
      .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
      .addField('- Banned By: ',message.author.tag,true)
      .addField('- Banned User:', `${User}`)
@@ -113,7 +113,7 @@ client.on('message', async message => {
      .setFooter(message.author.tag,message.author.avatarURL);
      let incidentchannel = message.guild.channels.find(`name`, "incidents");
 if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-incidentchannel.send(banEmbed);
+incidentchannel.send(bandEmbed);
 	  message.delete()
 message.channel.send(`**:white_check_mark: ${User} has been banned :airplane: **`).then(() => message.guild.member(User).ban({reason: Reason}))
 User.send(`**:airplane: You are has been banned in ${message.guild.name} reason: ${Reason} by: ${message.author.tag} :airplane:**`)
