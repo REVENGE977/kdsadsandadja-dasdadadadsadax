@@ -965,6 +965,7 @@ var args = message.content.split(" ").slice(1);
   
     await(tomute.addRole(muterole.id));
     message.channel.send(`:white_check_mark: <@${tomute.id}> Has been muted ! `);
+			message.delete();
     const muteembed = new Discord.RichEmbed()
     .setTitle('**New Muted User !**')
     .setColor("RANDOM")
@@ -975,12 +976,11 @@ var args = message.content.split(" ").slice(1);
     .addField("Muted In :", `[${message.channel.name}]`)
     .addField("Time & Date :", `[${message.createdAt}]`)
     .setFooter("MarsMC")
-    message.guild.channels.find('name',  'incidents').sendEmbed(Kickembed)
+    message.guild.channels.find('name',  'incidents').sendEmbed(muteembed)
     setTimeout(function(){
       tomute.removeRole(muterole.id);
       message.channel.send(`<:white_check_mark: @${tomute.id}> **Has been unnmuted due to time lapse **:white_check_mark: `);
     }, ms(mutetime));
-  		message.delete()
 
   
    
@@ -1010,6 +1010,7 @@ if(command === `unmute`) {
   await toMute.removeRole(role)
 
   message.channel.sendMessage(`**${toMute} Has been unmuted !**:white_check_mark:`);
+		message.delete();
   let mutedEmbed = new Discord.RichEmbed()
   .setDescription("» New UnMute User «")
   .setColor("#bc0000")
@@ -1020,7 +1021,6 @@ if(command === `unmute`) {
   .setFooter("MarsMC")
   let incidentchannel = message.guild.channels.find(`name`, "incidents");
   if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-	message.delete()
   return;
   
   }
