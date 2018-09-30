@@ -964,7 +964,7 @@ var args = message.content.split(" ").slice(1);
     if(!mutetime) return message.reply("**Please Type The Duration**:x:");
   
     await(tomute.addRole(muterole.id));
-    message.channel.send(`:white_check_mark: <@${tomute.id}> Has been muted ! `);
+    message.channel.send(`<@${tomute.id}> Has been muted ! :white_check_mark:`);
 			message.delete();
     const muteembed = new Discord.RichEmbed()
     .setTitle('**New Muted User !**')
