@@ -48,39 +48,41 @@ msg.delete();
 })
 }
 });
-
 client.on('message', async message => {
-const moment = require('moment');
-    let date = moment().format('Do MMMM YYYY , hh:mm');
-    let User = message.mentions.users.first();
-    let Reason = message.content.split(" ").slice(3).join(" ");
-    let messageArray = message.content.split(" ");
-    let time = messageArray[2];
-    if(message.content.startsWith(prefix + "ban")) {
-       if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return;
-       if(!User) message.channel.send("**- Could not find that user**");
-       if(User.id === client.user.id) return message.channel.send("**- You cant banned the bot**");
-       if(User.id === message.guild.owner.id) return message.channel.send("**- You cant banned the ownership**");
-       if(!time) return message.channel.send("**- Type the ban time**");
-       if(!time.match(/[1-60][s,m,h,d,w]/g)) return message.channel.send('**- Error in the banned time :/**');
-       if(!Reason) message.channel.send("**- Type the reason**");
-       let banEmbed = new Discord.RichEmbed()
-       .setDescription("~Ban~")
-       .setColor("#bc0000")
-       .addField("Banned User", `${User} with ID ${User.id}`)
-       .addField("Banned By", `${message.author.tag} with ID ${message.author.id}`)
-       .addField("Banned In", message.channel)
-       .addField("Time", message.createdAt)
-       .addField("Reason", reason);
-       let incidentchannel = message.guild.channels.find(`name`, "incidents");
-       if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-        User.send(`You Are Has Been Banned in MarsMC Network `)
-       User.sendMessage({embed: banEmbed}).then(() => message.guild.member(User).ban({reason: Reason}))
-       .then(() => message.channel.send(`**# Done! I banned: ${User}**`)).then(() => { setTimeout(() => {
-           message.guild.unban(User);
-       }, mmss(time));
-    });
-   }
+  var moment = require('moment');
+  var mmss = require('ms')
+  let date = moment().format('Do MMMM YYYY , hh:mm');
+  let User = message.mentions.users.first();
+  let Reason = message.content.split(" ").slice(3).join(" ");
+  let messageArray = message.content.split(" ");
+  let time = messageArray[2];
+  if(message.content.startsWith(prefix + "tempban")) {
+     if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
+     if(!User) message.channel.send("**Mention Someone**");
+     if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
+     if(User.id === message.guild.owner.id) return message.channel.send("**Nice try man :> you cant ban the ownership**");
+     if(!time) return message.channel.send("**- اكتب الوقت**");
+     if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Error in this Duration**');
+     if(!Reason) message.channel.send("**- اكتب Reason**");
+     let banEmbed = new Discord.RichEmbed()
+     .setAuthor(`You have been banned from ${message.guild.name} !`)
+     .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
+     .addField('- Banned By: ',message.author.tag,true)
+     .addField('- Banned User:', `${User}`)
+     .addField('- Reason:',Reason,true)
+     .addField('- Time & Date:',date,true)
+     .addField('- Duration:',time,true)
+     .setFooter(message.author.tag,message.author.avatarURL);
+     let incidentchannel = message.guild.channels.find(`name`, "incidents");
+if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
+incidentchannel.send(banEmbed);
+message.channel.send(`**:white_check_mark: ${User} has been banned :airplane: **`).then(() => message.guild.member(User).ban({reason: Reason}))
+User.send(`**:airplane: You are has been banned in ${message.guild.name} reason: ${Reason} by: ${message.author.tag} :airplane:**`)
+     .then(() => { setTimeout(() => {
+         message.guild.unban(User);
+     }, mmss(time));
+  });
+ }
 });
 
 client.on('message', message => {
