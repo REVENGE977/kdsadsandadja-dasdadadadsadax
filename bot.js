@@ -56,7 +56,7 @@ client.on('message', async message => {
   let Reason = message.content.split(" ").slice(3).join(" ");
   let messageArray = message.content.split(" ");
   let time = messageArray[2];
-  if(message.content.startsWith(prefix + "ban")) {
+  if(message.content.startsWith(prefix + "ban", "+b")) {
      if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
      if(!User) message.channel.send("**Mention Someone**");
      if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
@@ -86,43 +86,7 @@ User.send(`**:airplane: You are has been banned in ${message.guild.name} reason:
  }
 });
 
-client.on('message', async message => {
-  var moment = require('moment');
-  var mmss = require('ms')
-  let date = moment().format('Do MMMM YYYY , hh:mm');
-  let User = message.mentions.users.first();
-  let Reason = message.content.split(" ").slice(3).join(" ");
-  let messageArray = message.content.split(" ");
-  let time = messageArray[2];
-  if(message.content.startsWith(prefix + "b")) {
-     if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
-     if(!User) message.channel.send("**Mention Someone**");
-     if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
-     if(User.id === message.guild.owner.id) return message.channel.send("**Nice try man :> you cant ban the ownership**");
-     if(!time) return message.channel.send("**- اكتب الوقت**");
-     if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Error in this Duration**');
-     if(!Reason) message.channel.send("**- اكتب Reason**");
-     let bandEmbed = new Discord.RichEmbed()
-     .setAuthor(`New Banned User !`)
-     .setThumbnail(message.guild.iconURL || message.guild.avatarURL)
-     .addField('- Banned By: ',message.author.tag,true)
-     .addField('- Banned User:', `${User}`)
-     .addField('- Reason:',Reason,true)
-     .addField('- Time & Date:',date,true)
-     .addField('- Duration:',time,true)
-     .setFooter(message.author.tag,message.author.avatarURL);
-     let incidentchannel = message.guild.channels.find(`name`, "incidents");
-if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-incidentchannel.send(bandEmbed);
-	  message.delete()
-message.channel.send(`**:white_check_mark: ${User} has been banned :airplane: **`).then(() => message.guild.member(User).ban({reason: Reason}))
-User.send(`**:airplane: You are has been banned in ${message.guild.name} reason: ${Reason} by: ${message.author.tag} :airplane:**`)
-     .then(() => { setTimeout(() => {
-         message.guild.unban(User);
-     }, mmss(time));
-  });
- }
-});
+
 
 client.on('message', message => {
   if(!message.channel.guild) return;
@@ -130,7 +94,7 @@ if(message.content.startsWith('+bc')) {
 if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
 if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
 let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-let copy = "Plex Bot";
+let copy = "MarsMC";
 let request = `Requested By ${message.author.username}`;
 if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
 msg.react('✅')
