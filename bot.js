@@ -56,7 +56,7 @@ client.on('message', async message => {
   let Reason = message.content.split(" ").slice(3).join(" ");
   let messageArray = message.content.split(" ");
   let time = messageArray[2];
-  if(message.content.startsWith(prefix + "ban", "+b")) {
+  if(message.content.startsWith(prefix + "b")) {
      if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
      if(!User) message.channel.send("**Mention Someone**");
      if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
@@ -865,36 +865,12 @@ client.on('message',async message => {
 client.on('message',  async  message  =>  {
     var  user  =  message.mentions.users.first();
     var  reason  =  message.content.split(' ').slice(2).join(' ');
-if(message.content.startsWith(prefix  +  'warn'))  {
+if(message.content.startsWith(prefix  +  'w'))  {
 		if(!message.member.hasPermission('MUTE_MEMBERS')) return      message.channel.send('**للأسف لا تمتلك صلاحيات' );
     if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
+    message.delete()
     if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
-    let  reportembed  =  new  Discord.RichEmbed()
-    .setTitle(`**New  Reported  Staff  !**`)
-.addField("**-  Warned  User:**",  `[${user}  with  ID  ${user.id}]`)//by  orochix
-.addField('**-  Warned  By:**',`[${message.author.tag} with id ${message.author.id}]`)//by  orochix
-.addField('**-  Reason:**',  `[${reason}]`,  true)
-.addField("**-  Warned  in:**",`[${message.channel.name}]`)
-.addField("**-  Time & Date:**",`[${message.createdAt}]`)
-.setFooter("MarsMC")
-.setColor('#060c37')
-message.guild.channels.find('name',  'incidents').sendEmbed(reportembed)
-message.reply(`**:warning: ${user} has been warned !:warning**`).then(msg  =>  msg.delete(3000));
-  user.send(`**:warning: You are has been warned in ${message.guild.name} reason: ${reason} :warning:**`)
-	message.delete()
-}
-
-//coding  by  orochix  !
-
-})
-
-client.on('message',  async  message  =>  {
-    var  user  =  message.mentions.users.first();
-    var  reason  =  message.content.split(' ').slice(2).join(' ');
-if(message.content.startsWith(prefix  +  'w'))  {
-	if(!message.member.hasPermission('MUTE_MEMBERS')) return      message.channel.send('**للأسف لا تمتلك صلاحيات' );
-    if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
-    if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
+    message.delete()
     let  reportembed  =  new  Discord.RichEmbed()
     .setTitle(`**New  Reported  Staff  !**`)
 .addField("**-  Warned  User:**",  `[${user}  with  ID  ${user.id}]`)//by  orochix
@@ -915,47 +891,6 @@ message.reply(`**:warning: ${user} has been warned !:warning**`).then(msg  =>  m
 })
 
 
-client.on('message', message => {
-var prefix = "+";
-  if (message.author.kick) return;
-  if (!message.content.startsWith(prefix)) return;
-
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-
-  let args = message.content.split(" ").slice(1);
-
-  if (command == "kick") {
-               if(!message.channel.guild) return;
-
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
-  if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
-  let user = message.mentions.users.first();
-  let reason = message.content.split(" ").slice(2).join(" ");
-
-  if (message.mentions.users.size < 1) return message.reply("منشن شخص");
-  if(!reason) return message.reply ("اكتب سبب الطرد");
-  if (!message.guild.member(user)
-  .bannable) return message.reply("لايمكنني طرد شخص اعلى من رتبتي");
-
-  message.guild.member(user).kick(7, user);
-
-  const Kickembed = new Discord.RichEmbed()
-  .setTitle('**New Kicked User !**')
-  .setColor("RANDOM")
-  .setTimestamp()
-  .addField("Kicked User:",  `[ + ${user.tag} + ]`)
-  .addField("Kicked By:", `[  + ${message.author.tag} +  ]`)
-  .addField("Reason:", `[ + ${reason} +  ]`)
-  .addField("Kicked In :", `[${message.channel.name}]`)
-  .addField("Time & Date :", `[${message.createdAt}]`)
-  .setFooter("MarsMC")
-  message.guild.channels.find('name',  'incidents').sendEmbed(Kickembed)
-message.channel.send(`**:white_check_mark: ${user} has been kicked ! :airplane:**`)
-user.send(`**:airplane: You are has been kicked in ${message.guild.name} reason: ${reason}**`)
-	  message.delete()
-}
-});
 
 client.on('message', message => {
 var prefix = "+";
@@ -999,65 +934,9 @@ user.send(`**:airplane: You are has been kicked in ${message.guild.name} reason:
 }
 });
 
-client.on('message', async message =>{
-  var prefix = "+";   
-if (message.author.omar) return;  
-if (!message.content.startsWith(prefix)) return;  
-if(!message.channel.guild) return message.channel.send('**This Command For Servers Only ! **').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_ROLES'));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
-var command = message.content.split(" ")[0];
-command = command.slice(prefix.length);
-var args = message.content.split(" ").slice(1);
-	if(command == "mute") {
-    let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-    if(!tomute) return message.reply("**Mention Someone Please**:x: ") .then(m => m.delete(5000));
-    if(tomute.hasPermission("MANAGE_MESSAGES"))return      message.channel.send('**I Dont Have Permission** `MANAGE_MASSAGEES`');
-    let muterole = message.guild.roles.find(`name`, "muted");
-     
-    if(!muterole){  
-      try{
-        muterole = await message.guild.createRole({
-          name: "muted",
-          color: "#000000",
-          permissions:[]
-        })  
-        message.guild.channels.forEach(async (channel, id) => {
-          await channel.overwritePermissions(muterole, {
-            SEND_MESSAGES: false,
-            ADD_REACTIONS: false
-          });
-        });  
-      }catch(e){  
-        console.log(e.stack);
-      }  
-    }
-    let mutetime = args[1];
-    if(!mutetime) return message.reply("**Please Type The Duration**:x:");
-  
-    await(tomute.addRole(muterole.id));
-    message.channel.send(`**<@${tomute.id}> Has been muted ! :white_check_mark:**`);
-			message.delete();
-    const muteembed = new Discord.RichEmbed()
-    .setTitle('**New Muted User !**')
-    .setColor("RANDOM")
-    .setTimestamp()
-    .addField("Muted User:",  `[ + ${user.tag} + ]`)
-    .addField("Muted By:", `[  + ${message.author.tag} +  ]`)
-    .addField("Reason:", `[ + ${reason} +  ]`)
-    .addField("Muted In :", `[${message.channel.name}]`)
-    .addField("Time & Date :", `[${message.createdAt}]`)
-    .setFooter("MarsMC")
-    message.guild.channels.find('name',  'incidents').sendEmbed(muteembed)
-    setTimeout(function(){
-      tomute.removeRole(muterole.id);
-      message.channel.send(`<:white_check_mark: @${tomute.id}> **Has been unnmuted due to time lapse **:white_check_mark: `);
-    }, ms(mutetime));
 
-  
-   
-  }  
-});
+
+
 
 
 client.on('message', async message =>{
@@ -1120,46 +999,7 @@ var args = message.content.split(" ").slice(1);
   }  
 });
 
-client.on('message', async message =>{
-  var prefix = "+";  
-if (message.author.omar) return;
-if (!message.content.startsWith(prefix)) return;
-if(!message.channel.guild) return message.channel.send('**This Command For Servers Only ! **').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_ROLES'));
-if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply("**I Don't Have `MANAGE_ROLES` Permission**").then(msg => msg.delete(6000))
-var command = message.content.split(" ")[0];
-command = command.slice(prefix.length);
-var args = message.content.split(" ").slice(1);
-if(command === `unmute`) {
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**You Dont Have MANAGE_ROLES Permssions**:x: ").then(msg => msg.delete(6000))
 
-
-  let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-  if(!toMute) return message.channel.sendMessage("**Mention Someone Please**:x: ");
-
-  let role = message.guild.roles.find (r => r.name === "muted");
-  
-  if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**This Person Is Not Muted ! **:x:")
-
-  await toMute.removeRole(role)
-
-  message.channel.sendMessage(`**${toMute} Has been unmuted !**:white_check_mark:`);
-		message.delete();
-  let mutedEmbed = new Discord.RichEmbed()
-  .setDescription("» New UnMute User «")
-  .setColor("#bc0000")
-  .addField("Unmuted", `${Warned} with ID ${Warned.id}`)
-  .addField("Unmuted By", `<@${message.member.id}> with ID ${message.member.id}`)
-  .addField("Unmuted In", message.channel)
-  .addField("Time & Date", `${message.createdAt}`)
-  .setFooter("MarsMC")
-  let incidentchannel = message.guild.channels.find(`name`, "incidents");
-  if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-  return;
-  
-  }
-
-});  
   
 
 client.on('message', async message =>{
