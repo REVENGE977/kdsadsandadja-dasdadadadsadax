@@ -902,6 +902,7 @@ client.on('message',  async  message  =>  {
     var  user  =  message.mentions.users.first();
     var  reason  =  message.content.split(' ').slice(2).join(' ');
 if(message.content.startsWith(prefix  +  'warn'))  {
+		if(!message.member.hasPermission('MUTE_MEMBERS')) return      message.channel.send('**للأسف لا تمتلك صلاحيات' );
     if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
     if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
     let  reportembed  =  new  Discord.RichEmbed()
@@ -927,6 +928,7 @@ client.on('message',  async  message  =>  {
     var  user  =  message.mentions.users.first();
     var  reason  =  message.content.split(' ').slice(2).join(' ');
 if(message.content.startsWith(prefix  +  'w'))  {
+	if(!message.member.hasPermission('MUTE_MEMBERS')) return      message.channel.send('**للأسف لا تمتلك صلاحيات' );
     if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
     if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
     let  reportembed  =  new  Discord.RichEmbed()
