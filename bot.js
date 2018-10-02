@@ -871,7 +871,7 @@ if(message.content.startsWith(prefix  +  'w'))  {
     if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
     if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
     let  reportembed  =  new  Discord.RichEmbed()
-    .setTitle(`**New  Reported  Staff  !**`)
+    .setTitle(`**New  Warned User !**`)
 .addField("**-  Warned  User:**",  `[${user}  with  ID  ${user.id}]`)//by  orochix
 .addField('**-  Warned  By:**',`[${message.author.tag} with id ${message.author.id}]`)//by  orochix
 .addField('**-  Reason:**',  `[${reason}]`,  true)
