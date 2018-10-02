@@ -866,6 +866,7 @@ client.on('message',  async  message  =>  {
     var  user  =  message.mentions.users.first();
     var  reason  =  message.content.split(' ').slice(2).join(' ');
 if(message.content.startsWith(prefix  +  'w'))  {
+		message.delete()
 		if(!message.member.hasPermission('MUTE_MEMBERS')) return      message.channel.send('**للأسف لا تمتلك صلاحيات' );
     if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
     if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
@@ -881,7 +882,6 @@ if(message.content.startsWith(prefix  +  'w'))  {
 message.guild.channels.find('name',  'incidents').sendEmbed(reportembed)
 message.reply(`**:warning: ${user} has been warned !:warning:**`).then(msg  =>  msg.delete(3000));
   user.send(`**:warning: You are has been warned in ${message.guild.name} reason: ${reason} :warning:**`)
-	message.delete()
 }
 
 //coding  by  orochix  !
