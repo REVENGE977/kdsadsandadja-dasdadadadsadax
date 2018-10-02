@@ -868,9 +868,7 @@ client.on('message',  async  message  =>  {
 if(message.content.startsWith(prefix  +  'w'))  {
 		if(!message.member.hasPermission('MUTE_MEMBERS')) return      message.channel.send('**للأسف لا تمتلك صلاحيات' );
     if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
-    message.delete()
     if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
-    message.delete()
     let  reportembed  =  new  Discord.RichEmbed()
     .setTitle(`**New  Reported  Staff  !**`)
 .addField("**-  Warned  User:**",  `[${user}  with  ID  ${user.id}]`)//by  orochix
@@ -881,7 +879,7 @@ if(message.content.startsWith(prefix  +  'w'))  {
 .setFooter("MarsMC")
 .setColor('#060c37')
 message.guild.channels.find('name',  'incidents').sendEmbed(reportembed)
-message.reply(`**:warning: ${user} has been warned !:warning**`).then(msg  =>  msg.delete(3000));
+message.reply(`**:warning: ${user} has been warned !:warning:**`).then(msg  =>  msg.delete(3000));
   user.send(`**:warning: You are has been warned in ${message.guild.name} reason: ${reason} :warning:**`)
 	message.delete()
 }
