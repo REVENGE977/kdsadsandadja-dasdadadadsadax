@@ -950,7 +950,6 @@ var args = message.content.split(" ").slice(1);
 	if(command == "m") {
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!tomute) return message.reply("**Mention Someone Please**:x: ") .then(m => m.delete(5000));
-    if(tomute.hasPermission("MANAGE_MESSAGES"))return      message.channel.send('**I Dont Have Permission** `MANAGE_MASSAGEES`');
     let muterole = message.guild.roles.find(`name`, "muted");
      
     if(!muterole){  
@@ -982,7 +981,7 @@ var args = message.content.split(" ").slice(1);
     .setTimestamp()
     .addField("Muted User:",  `[ + ${tomute.tag} + ]`)
     .addField("Muted By:", `[  + ${message.author.tag} +  ]`)
-    .addField("Reason:", `[ + ${reason} +  ]`)
+    .addField("Reason:", `[ + ${args} +  ]`)
     .addField("Muted In :", `[${message.channel.name}]`)
     .addField("Time & Date :", `[${message.createdAt}]`)
     .setFooter("MarsMC")
