@@ -979,7 +979,7 @@ var args = message.content.split(" ").slice(1);
     .setTitle('**New Muted User !**')
     .setColor("RANDOM")
     .setTimestamp()
-    .addField("Muted User:",  `[ + ${tomute.tag} + ]`)
+    .addField("Muted User:",  `[ + ${tomute} + ]`)
     .addField("Muted By:", `[  + ${message.author.tag} +  ]`)
     .addField("Reason:", `[ + ${args} +  ]`)
     .addField("Muted In :", `[${message.channel.name}]`)
