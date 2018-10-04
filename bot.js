@@ -967,6 +967,7 @@ client.on('message', async message => {
         let incidentchannel = message.guild.channels.find(`name`, "incidents");
         if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
         incidentchannel.send(muteEmbed)
+	    message.delete()
         mutePerson.send(`**You Are has been muted in ${message.guild.name} reason: ${muteReason}**`)
         .then(() => { setTimeout(() => {
            message.guild.member(mutePerson).removeRole(muteRole);
