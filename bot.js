@@ -966,7 +966,7 @@ client.on('message', async message => {
         .setFooter(message.author.username,message.author.avatarURL);
         let incidentchannel = message.guild.channels.find(`name`, "incidents");
         if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
-        message.channel.sendMessage(muteEmbed)
+        incidentchannel.send(muteEmbed)
         mutePerson.send(`**You Are has been muted in ${message.guild.name} reason: ${muteReason}**`)
         .then(() => { setTimeout(() => {
            message.guild.member(mutePerson).removeRole(muteRole);
@@ -995,7 +995,7 @@ if(command === `unm`) {
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
   if(!toMute) return message.channel.sendMessage("**Mention Someone Please**:x: ");
 
-  let role = message.guild.roles.find (r => r.name === "muted");
+  let role = message.guild.roles.find (r => r.name === "Muted");
   
   if(!role || !toMute.roles.has(role.id)) return message.channel.sendMessage("**This Person Is Not Muted ! **:x:")
 
