@@ -954,7 +954,6 @@ client.on('message', async message => {
         if(!muteReason) return message.channel.send("**- اكتب السبب**");
         message.guild.member(mutePerson).addRole(muteRole);
         let muteEmbed = new Discord.RichEmbed()
-        .setAuthor(`${mutePerson.username}#${mutePerson.discriminator}`,mutePerson.avatarURL)
         .setTitle(`New Muted User`)
         .setThumbnail(message.guild.iconURL)
         .addField('- Muted By:',message.author,true)
