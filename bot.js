@@ -948,6 +948,7 @@ var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
 	if(command == "m") {
+		    let muteReason = message.content.split(" ").slice(3).join(" ");
     let tomute = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     if(!tomute) return message.reply("**Mention Someone Please**:x: ") .then(m => m.delete(5000));
     let muterole = message.guild.roles.find(`name`, "muted");
@@ -969,6 +970,7 @@ var args = message.content.split(" ").slice(1);
         console.log(e.stack);
       }  
     }
+		if(!muteReason) return message.reply('Type The Reason :x:')
     let mutetime = args[1];
     if(!mutetime) return message.reply("**Please Type The Duration**:x:");
   
@@ -981,8 +983,9 @@ var args = message.content.split(" ").slice(1);
     .setTimestamp()
     .addField("Muted User:",  `[ + ${tomute} + ]`)
     .addField("Muted By:", `[  + ${message.author.tag} +  ]`)
-    .addField("Reason:", `[ + ${args} +  ]`)
+    .addField("Reason:", `[ + ${muteReason} +  ]`)
     .addField("Muted In :", `[${message.channel.name}]`)
+    .addField("Duration :", `[${mutetime}]`)
     .addField("Time & Date :", `[${message.createdAt}]`)
     .setFooter("MarsMC")
     message.guild.channels.find('name',  'incidents').sendEmbed(muteembed)
