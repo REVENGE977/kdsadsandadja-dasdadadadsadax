@@ -964,6 +964,7 @@ client.on('message', async message => {
         .setFooter(message.author.username,message.author.avatarURL);
         let incidentchannel = message.guild.channels.find(`name`, "incidents");
         if(!incidentchannel) return message.channel.send("Can't find incidents channel.");
+ message.channel.send(`**:white_check_mark: ${user} has been muted !**`)
         incidentchannel.send(muteEmbed)
 	    message.delete()
         mutePerson.send(`**You Are has been muted in ${message.guild.name} reason: ${muteReason}**`)
