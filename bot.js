@@ -52,12 +52,15 @@ client.on('message', async message => {
   let User = message.mentions.users.first();
   let Reason = message.content.split(" ").slice(3).join(" ");
   let messageArray = message.content.split(" ");
+	  let role1 = "✽ Discord Staff";
+  let gRole1 = message.guild.roles.find(`name`, role1);
   let time = messageArray[2];
   if(message.content.startsWith(prefix + "b")) {
      if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
      if(!User) message.channel.send("**Mention Someone**");
      if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
-     if(User.id === message.guild.owner.id) return message.channel.send("**Nice try man :> you cant ban the ownership**");
+	    if(tomute.roles.has(gRole1.id)) return message.channel.send("Can't ban that player!");
+     if(User.id === message.guild.owner.id) return message.channel.send("**You can't ban the ownership**");
      if(!time) return message.channel.send("**- اكتب الوقت**");
      if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Error in this Duration**');
      if(!Reason) message.channel.send("**- اكتب Reason**");
@@ -898,14 +901,17 @@ var prefix = "+";
   let args = message.content.split(" ").slice(1);
 
   if (command == "k") {
+	    let role1 = "✽ Discord Staff";
+  let gRole1 = message.guild.roles.find(`name`, role1);
                if(!message.channel.guild) return;
-
+let user = message.mentions.users.first()
   if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
   if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
-  if (message.mentions.users.size < 1) return message.reply("منشن شخص");
+  if (!user) return message.reply("منشن شخص");
+	    if(user.roles.has(gRole1.id)) return message.channel.send("Can't kick that player!");
   if(!reason) return message.reply ("اكتب سبب الطرد");
   if (!message.guild.member(user)
   .bannable) return message.reply("لايمكنني طرد شخص اعلى من رتبتي");
@@ -941,9 +947,12 @@ client.on('message', async message => {
     let messageArray = message.content.split(" ");
     let muteRole = message.guild.roles.find("name", "Muted");
     let time = messageArray[2];
+	  let role1 = "✽ Discord Staff";
+  let gRole1 = message.guild.roles.find(`name`, role1);
     if(message.content.startsWith(prefix + "m")) {
         if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('**للأسف لا تمتلك صلاحية** `MUTE_MEMBERS`' );
         if(!mutePerson) return message.channel.send("**- منشن الشخص يلي تبي تعطيه الميوت**");
+	      if(mutePerson.roles.has(gRole1.id)) return message.channel.send("Can't mute that player!");
         if(mutePerson === message.author) return message.channel.send('**- ماتقدر تعطي نفسك ميوت**');
         if(mutePerson === client.user) return message.channel.send('**- ماتقدر تعطي البوت ميوت :)**');
         if(message.guild.member(mutePerson).roles.has(muteRole.id)) return message.channel.send('**- هذا الشخص ميوتد بالفعل**');
