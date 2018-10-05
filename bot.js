@@ -906,7 +906,6 @@ var prefix = "+";
 let user = message.mentions.users.first()
   if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return;
   if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
-  let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
 
   if (!user) return message.reply("منشن شخص");
