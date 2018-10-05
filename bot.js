@@ -59,7 +59,7 @@ client.on('message', async message => {
      if(!message.guild.member(message.author).hasPermission("BAN_MEMBERS")) return message.channel.send("**You dont have ban_members permission :/ **");
      if(!User) message.channel.send("**Mention Someone**");
      if(User.id === client.user.id) return message.channel.send("**Why you want to ban me ? :/**");
-	    if(tomute.roles.has(gRole1.id)) return message.channel.send("Can't ban that player!");
+	    if(User.roles.has(gRole1.id)) return message.channel.send("Can't ban that player!");
      if(User.id === message.guild.owner.id) return message.channel.send("**You can't ban the ownership**");
      if(!time) return message.channel.send("**- اكتب الوقت**");
      if(!time.match(/[1-7][s,m,h,d,w]/g)) return message.channel.send('**- Error in this Duration**');
@@ -867,7 +867,7 @@ client.on('message',  async  message  =>  {
     var  reason  =  message.content.split(' ').slice(2).join(' ');
 if(message.content.startsWith(prefix  +  'w'))  {
 		message.delete();
-		if(!message.member.hasPermission('MUTE_MEMBERS')) return      message.channel.send('**للأسف لا تمتلك صلاحيات' );
+		if(!message.member.hasPermission('MUTE_MEMBERS')) return;
     if(!user)  return  message.channel.send("**  -  mention  a  member  **")//by  orochix
     if(!reason)  return  message.channel.send("**  -  Type  Reason  **")//by  orochix
     let  reportembed  =  new  Discord.RichEmbed()
@@ -905,7 +905,7 @@ var prefix = "+";
   let gRole1 = message.guild.roles.find(`name`, role1);
                if(!message.channel.guild) return;
 let user = message.mentions.users.first()
-  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("You Don't Have KICK_MEMBERS Permission").then(msg => msg.delete(5000));
+  if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return;
   if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("I Don't Have KICK_Members Permission");
   let user = message.mentions.users.first();
   let reason = message.content.split(" ").slice(2).join(" ");
@@ -950,7 +950,7 @@ client.on('message', async message => {
 	  let role1 = "✽ Discord Staff";
   let gRole1 = message.guild.roles.find(`name`, role1);
     if(message.content.startsWith(prefix + "m")) {
-        if(!message.member.hasPermission('MUTE_MEMBERS')) return message.channel.send('**للأسف لا تمتلك صلاحية** `MUTE_MEMBERS`' );
+        if(!message.member.hasPermission('MUTE_MEMBERS')) return;
         if(!mutePerson) return message.channel.send("**- منشن الشخص يلي تبي تعطيه الميوت**");
 	      if(mutePerson.roles.has(gRole1.id)) return message.channel.send("Can't mute that player!");
         if(mutePerson === message.author) return message.channel.send('**- ماتقدر تعطي نفسك ميوت**');
@@ -996,7 +996,7 @@ var command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
 var args = message.content.split(" ").slice(1);
 if(command === `unm`) {
-  if(!message.member.hasPermission("MANAGE_ROLES")) return message.channel.sendMessage("**You Dont Have MANAGE_ROLES Permssions**:x: ").then(msg => msg.delete(6000))
+  if(!message.member.hasPermission("MANAGE_ROLES")) return;
 
 
   let toMute = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
