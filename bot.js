@@ -6,7 +6,7 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 const hastebin = require('hastebin.js');
-var h = new hastebin({});
+const h = new hastebin({});
 
 client.on('message', message => {
     if (!message.content.startsWith(prefix)) return;
@@ -44,8 +44,6 @@ client.on('message', message => {
     };
 });
 
-const hastebin = require('hastebin.js');
-var h = new hastebin({});
 
 client.on('message', message => {
     if (!message.content.startsWith(prefix)) return;
