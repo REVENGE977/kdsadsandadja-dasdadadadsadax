@@ -5,44 +5,82 @@ const prefix = "+";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
+const hastebin = require('hastebin.js');
+var h = new hastebin({});
+
 client.on('message', message => {
-   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'clear')) {
-if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-if(!message.member.hasPermission('MANAGE_MESSAGES')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `MANAGE_MESSAGES`' );
-let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-let request = `Requested By ${message.author.username}`;
-message.channel.send(`**هل انت متاكد من مسح الشات؟`).then(msg => {
-msg.react('✅')
-.then(() => msg.react('❌'))
-.then(() =>msg.react('✅'))
+    if (!message.content.startsWith(prefix)) return;
+    var args = message.content.split(' ');
+    var command = args[0];
+    switch(command) {
+        case "+clear":
+        if (message.channel.type !== "text") return message.reply("** This Command is Only For Servers | :x: **");
+        if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("** You Don't Have Access To Do This Command | :x: **");
+        if (!args[1]) args[1] = 100;
+        var count = parseInt(args[1]);
+        if (isNaN(count)) return message.reply("** You Have To Type Number | :x: **");
+        message.channel.bulkDelete(count).then(msgs => {
+            message.channel.send(`** Done ** | I have Deleted ${msgs.size} Messages ...`);
+            var x = 0;
+            var messages = msgs.map(m => `${++x} - ${m.author.tag}  :  ${m.content.split(" ").join(" ")}`).join(`
+`);
+            fs.writeFile(`${message.guild.id}.txt`, messages, (err) => {
+                if (err) console.log(err.message);
+                h.post(messages).then(url => {
+                    var c = message.guild.channels.find("name", 'logs');
+                    if (!c) return;
+                    var embed = new Discord.RichEmbed()
+                    .setTitle(`Bulk Delete. | ${msgs.size} Messages`)
+                    .setAuthor(client.user.tag, client.user.avatarURL)
+                    .setThumbnail(message.guild.iconURL)
+                    .setColor("RANDOM")
+                    .setDescription(`By \`${message.author.tag}\`\n\n In #${message.channel.name}\n\n [Vew Messages on : \`HasteBin\`](${url})`)
+                    .attachFile(`./${message.guild.id}.txt`);
+                    c.send(`Download Messages : `, {embed : embed});
+                });
+            });
+        });
+        break;
+    };
+});
 
-let reaction1Filter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-let reaction2Filter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+const hastebin = require('hastebin.js');
+var h = new hastebin({});
 
-let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
-let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
-reaction1.on("collect", r => {
-message.channel.send(`سوف يمسح الشات`).then(m => m.delete(5000));
-var msg;
-        msg = parseInt();
-
-      message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-      message.channel.sendMessage("", {embed: {
-        title: "``تــم مسح الشات ``",
-        color: 0x06DF00,
-        footer: {
-
-        }
-      }}).then(msg => {msg.delete(3000)});
-
-})
-reaction2.on("collect", r => {
-message.channel.send(`**تم الغاء مسح الشات**`).then(m => m.delete(5000));
-msg.delete();
-})
-})
-}
+client.on('message', message => {
+    if (!message.content.startsWith(prefix)) return;
+    var args = message.content.split(' ');
+    var command = args[0];
+    switch(command) {
+        case "+prune":
+        if (message.channel.type !== "text") return message.reply("** This Command is Only For Servers | :x: **");
+        if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("** You Don't Have Access To Do This Command | :x: **");
+        if (!args[1]) args[1] = 100;
+        var count = parseInt(args[1]);
+        if (isNaN(count)) return message.reply("** You Have To Type Number | :x: **");
+        message.channel.bulkDelete(count).then(msgs => {
+            message.channel.send(`** Done ** | I have Deleted ${msgs.size} Messages ...`);
+            var x = 0;
+            var messages = msgs.map(m => `${++x} - ${m.author.tag}  :  ${m.content.split(" ").join(" ")}`).join(`
+`);
+            fs.writeFile(`${message.guild.id}.txt`, messages, (err) => {
+                if (err) console.log(err.message);
+                h.post(messages).then(url => {
+                    var c = message.guild.channels.find("name", 'logs');
+                    if (!c) return;
+                    var embed = new Discord.RichEmbed()
+                    .setTitle(`Bulk Delete. | ${msgs.size} Messages`)
+                    .setAuthor(client.user.tag, client.user.avatarURL)
+                    .setThumbnail(message.guild.iconURL)
+                    .setColor("RANDOM")
+                    .setDescription(`By \`${message.author.tag}\`\n\n In #${message.channel.name}\n\n [Vew Messages on : \`HasteBin\`](${url})`)
+                    .attachFile(`./${message.guild.id}.txt`);
+                    c.send(`Download Messages : `, {embed : embed});
+                });
+            });
+        });
+        break;
+    };
 });
 client.on('message', async message => {
   var moment = require('moment');
